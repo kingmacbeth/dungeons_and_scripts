@@ -8,7 +8,7 @@ class VM:
         while True:
             room = self.game_data.get(self.current_room)
             if not room:
-                print(f"⚠ Sala '{self.current_room}' não encontrada!")
+                print(f"Sala '{self.current_room}' não encontrada!")
                 break
 
             for stmt in room:

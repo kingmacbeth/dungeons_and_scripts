@@ -8,9 +8,9 @@ game_data = {}
 
 def p_script(p):
     """script : rooms"""
-    p[0] = p[1]
     global game_data
     game_data = p[0]
+    p[0] = p[1]
 
 
 def p_rooms_multiple(p):
