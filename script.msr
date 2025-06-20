@@ -1,0 +1,20 @@
+room start {
+    text "Você está numa sala escura e vê duas saídas."
+    choice "Ir para o corredor" -> corredor
+    choice "Explorar a escuridão" -> morte
+}
+
+room corredor {
+    text "Você vê um goblin te encarando."
+    enemy "Goblin" HP 10
+    attack
+    choice "Avançar pela escada" -> tesouro
+}
+
+room tesouro {
+    text "Você encontrou um baú cheio de ouro. Parabéns!"
+}
+
+room morte {
+    text "Você tropeçou e caiu num poço sem fundo. Fim de jogo."
+}
