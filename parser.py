@@ -2,14 +2,9 @@ from ply import yacc
 
 from lexer import tokens
 
-# Estrutura para guardar os dados do jogo
-game_data = {}
-
 
 def p_script(p):
     """script : rooms"""
-    global game_data
-    game_data = p[0]
     p[0] = p[1]
 
 
@@ -72,3 +67,7 @@ def p_error(p):
 
 
 parser = yacc.yacc()
+
+
+def parse_code(script_file: str) -> dict:
+    return parser.parse(script_file)

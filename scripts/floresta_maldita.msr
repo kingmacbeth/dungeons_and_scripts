@@ -1,0 +1,33 @@
+room start {
+    text "Você está diante de uma floresta envolta por névoa espessa. Um sussurro ecoa: 'Volte... enquanto pode.'"
+    choice "Entrar na floresta" -> trilha
+    choice "Ignorar e seguir por outra estrada" -> vila
+}
+
+room trilha {
+    text "A trilha leva até um altar de pedra coberto por musgo. Um espírito aparece."
+    enemy "Espírito Antigo" HP 12
+    attack
+    choice "Investigar a caverna atrás do altar" -> caverna
+}
+
+room vila {
+    text "Você encontra uma vila abandonada. Em uma casa há um livro de feitiços aberto."
+    choice "Ler o livro" -> maldicao
+    choice "Voltar para a floresta" -> trilha
+}
+
+room caverna {
+    text "Na caverna você encontra uma relíquia brilhante. A floresta parece recuar."
+    text "Você selou a maldição com sucesso!"
+    goto fim
+}
+
+room maldicao {
+    text "O livro lança uma maldição sobre você. Seu corpo começa a se transformar em árvore."
+    goto fim
+}
+
+room fim {
+    text "Obrigado por explorar a Floresta Amaldiçoada!"
+}

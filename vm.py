@@ -8,8 +8,9 @@ class VM:
         while True:
             room = self.game_data.get(self.current_room)
             if not room:
-                print(f"Sala '{self.current_room}' não encontrada!")
                 break
+
+            next_room_set = False
 
             for stmt in room:
                 if stmt[0] == "text":
@@ -28,6 +29,9 @@ class VM:
                 elif stmt[0] == "goto":
                     self.current_room = stmt[1]
                     return
+
+            if not next_room_set:
+                self.current_room = None
 
     def handle_attack(self):
         print("\n⚔ Iniciando combate...")

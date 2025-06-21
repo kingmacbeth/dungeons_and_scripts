@@ -1,0 +1,38 @@
+room start {
+    text "Você acorda em uma estação espacial abandonada. Alarmes silenciosos piscam em vermelho."
+    choice "Explorar o corredor escuro" -> corredor
+    choice "Entrar na sala de controle" -> controle
+}
+
+room corredor {
+    text "No corredor, um drone de segurança defeituoso ataca você."
+    enemy "Drone de Segurança" HP 8
+    attack
+    choice "Avançar para a câmara de escape" -> escape
+}
+
+room controle {
+    text "A sala de controle está destruída. Você encontra um diário eletrônico com informações criptografadas."
+    choice "Voltar ao saguão" -> start
+    choice "Seguir para o laboratório" -> laboratorio
+}
+
+room laboratorio {
+    text "Você encontra um corpo flutuando. Há registros indicando falha crítica no reator."
+    choice "Tentar reiniciar o sistema" -> morte
+    choice "Sair imediatamente" -> escape
+}
+
+room escape {
+    text "Você entra em uma cápsula de emergência e escapa da estação antes da explosão. Parabéns, você sobreviveu!"
+    goto fim
+}
+
+room morte {
+    text "O reator explode enquanto você tenta reiniciar o sistema. Você morreu."
+    goto fim
+}
+
+room fim {
+    text "Obrigado por jogar Dungeons no Espaço!"
+}

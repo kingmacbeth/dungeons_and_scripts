@@ -16,5 +16,5 @@ room tesouro {
 }
 
 room morte {
-    text "Você tropeçou e caiu num poço sem fundo. Fim de jogo."
+    text "Você tropeçou e caiu num poço sem fundo."
 }
