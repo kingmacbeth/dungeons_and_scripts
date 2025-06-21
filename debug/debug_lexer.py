@@ -1,6 +1,6 @@
-from lexer import lexer
+from src.lexer import lexer
 
-with open("script.msr") as f:
+with open("scripts/castelo_sombrio.msr") as f:
     code = f.read()
 
 lexer.input(code)

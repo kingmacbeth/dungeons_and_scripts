@@ -1,34 +1,42 @@
+import os
 import sys
+import time
 
-from src.utils import cartridge_menu, intro, load_script, loading
+from src.utils import cartridge_menu, intro, load_script, loading, slow_text
 from src.vm import VM
 
 
 def main():
     while True:
+        os.system("clear")
         intro()
         cartridge_menu()
 
-        choice = input("Seleção: ").strip()
+        choice = input("\nSeleção: ").strip()
 
         if choice == "0":
-            print("Encerrando o jogo. Até logo!")
+            print("Obrigado por jogar!")
+            loading("\nEncerrando")
+
+            os.system("clear")
             sys.exit(0)
 
         elif choice == "1":
-            loading("Carregando Floresta Maldita")
+            loading("\nCarregando Floresta Maldita")
             script = load_script("scripts/floresta_maldita.msr")
         elif choice == "2":
-            loading("Carregando Fortaleza do Demônio")
+            loading("\nCarregando Fortaleza do Demônio")
             script = load_script("scripts/fortaleza_demonio.msr")
         elif choice == "3":
-            loading("Carregando Morte no Espaço")
+            loading("\nCarregando Morte no Espaço")
             script = load_script("scripts/morte_espaco.msr")
         elif choice == "4":
-            loading("Carregando Castelo Sombrio")
+            loading("\nCarregando Castelo Sombrio")
             script = load_script("scripts/castelo_sombrio.msr")
         else:
-            print("Escolha inválida. Por favor, tente novamente.")
+            os.system("clear")
+            slow_text("Escolha inválida. Por favor, tente novamente.")
+            time.sleep(1)
             continue
 
         vm = VM(script)
@@ -36,8 +44,9 @@ def main():
         while vm.current_room:
             vm.run()
 
-        print("Fim do jogo.")
-        input("\nPressione Enter para retornar ao menu principal...\n")
+        time.sleep(1)
+        print("\nFim do jogo.")
+        input("\nPressione a tecla 'Enter' para retornar ao menu principal.\n")
 
 
 if __name__ == "__main__":
