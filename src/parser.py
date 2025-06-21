@@ -1,6 +1,6 @@
 from ply import yacc
 
-from lexer import tokens
+from src.lexer import tokens
 
 
 def p_script(p):

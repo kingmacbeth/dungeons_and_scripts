@@ -1,7 +1,7 @@
 import sys
 
-from utils import cartridge_menu, intro, load_script, loading
-from vm import VM
+from src.utils import cartridge_menu, intro, load_script, loading
+from src.vm import VM
 
 
 def main():
