@@ -7,7 +7,7 @@ room start {
 
 room trilha {
     text "A trilha leva até um altar de pedra coberto por musgo. Um espírito aparece."
-    enemy "Espírito Antigo" HP 12
+    enemy "Espirito Antigo" HP 12
     attack
     choice "Investigar a caverna atrás do altar" -> caverna
 }

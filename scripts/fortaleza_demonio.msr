@@ -7,14 +7,14 @@ room start {
 
 room salao {
     text "No grande salão, um cavaleiro esquelético guarda o trono."
-    enemy "Cavaleiro Morto-Vivo" HP 10
+    enemy "Cavaleiro Morto Vivo" HP 10
     attack
     choice "Subir para os aposentos reais" -> aposentos
 }
 
 room torre {
     text "Você sobe a muralha e encontra uma gárgula viva em vigia."
-    enemy "Gárgula" HP 8
+    enemy "Gargula" HP 8
     attack
     choice "Entrar pela janela do salão" -> salao
     choice "Descer para as catacumbas" -> catacumba

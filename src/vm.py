@@ -38,9 +38,9 @@ class VM:
                         self.hero = Hero(stmt[1], stmt[2])
                     case "enemy":
                         self.enemy = Enemy(stmt[1], stmt[2])
-                        slow_text(
-                            f"\nUm inimigo apareceu: {self.enemy.name} (HP {self.enemy.hp})"
-                        )
+                        slow_text("\nUm inimigo apareceu: ")
+                        slow_text(f"\n{self.enemy.name}")
+                        slow_text(f"\nHP {self.enemy.hp}")
                         self.show_enemy_art(self.enemy.get_ascii_filename())
                     case "attack":
                         self.handle_attack()

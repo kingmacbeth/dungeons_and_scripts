@@ -13,12 +13,12 @@ def intro() -> None:
 def cartridge_menu() -> None:
     slow_text("\nDigite o número do cartucho para jogar:")
     time.sleep(1)
-    slow_text("1 - Floresta Maldita", 0.03)
-    slow_text("2 - A Fortaleza do Demônio", 0.03)
-    slow_text("3 - Morte no Espaço", 0.03)
-    slow_text("4 - Castelo Sombrio", 0.03)
+    slow_text("1 - Castelo Sombrio", 0.03)
+    slow_text("2 - Floresta Maldita", 0.03)
+    slow_text("3 - A Fortaleza do Demônio", 0.03)
+    slow_text("4 - Morte no Espaço", 0.03)
     slow_text("\n \n0 - Sair do jogo", 0.03)
-    time.sleep(1)
+    time.sleep(0.5)
 
 
 def load_script(filename: str) -> dict:

@@ -7,7 +7,7 @@ room start {
 
 room corredor {
     text "No corredor, um drone de segurança defeituoso ataca você."
-    enemy "Drone de Segurança" HP 8
+    enemy "Drone de Seguranca" HP 8
     attack
     choice "Avançar para a câmara de escape" -> escape
 }
