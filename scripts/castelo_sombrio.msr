@@ -1,4 +1,5 @@
 room start {
+    hero "Aragorn" HP 30
     text "Você está numa sala escura e vê duas saídas."
     choice "Ir para o corredor" -> corredor
     choice "Explorar a escuridão" -> morte

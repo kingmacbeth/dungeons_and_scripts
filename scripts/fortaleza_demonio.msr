@@ -1,4 +1,5 @@
 room start {
+    hero "Aragorn" HP 30
     text "Você chega ao portão de Eldrath, uma fortaleza há muito abandonada. Dizem que há um artefato sagrado escondido lá dentro."
     choice "Entrar pela entrada principal" -> salao
     choice "Contornar e subir pelos muros" -> torre
@@ -49,5 +50,5 @@ room corrompido {
 }
 
 room fim {
-    text "Obrigado por jogar A Fortaleza de Eldrath!"
+    text "Obrigado por jogar A Fortaleza do Demonio!"
 }

@@ -1,4 +1,5 @@
 room start {
+    hero "Aragorn" HP 30
     text "Você acorda em uma estação espacial abandonada. Alarmes silenciosos piscam em vermelho."
     choice "Explorar o corredor escuro" -> corredor
     choice "Entrar na sala de controle" -> controle
@@ -34,5 +35,5 @@ room morte {
 }
 
 room fim {
-    text "Obrigado por jogar Dungeons no Espaço!"
+    text "Obrigado por jogar Morte no Espaço!"
 }

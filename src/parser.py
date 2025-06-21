@@ -51,6 +51,11 @@ def p_stmt_enemy(p) -> None:
     p[0] = ("enemy", p[2].strip('"'), int(p[4]))
 
 
+def p_stmt_hero(p) -> None:
+    """stmt : HERO STRING ID NUMBER"""
+    p[0] = ("hero", p[2].strip('"'), int(p[4]))
+
+
 def p_stmt_attack(p) -> None:
     """stmt : ATTACK"""
     p[0] = ("attack",)
@@ -63,10 +68,10 @@ def p_stmt_goto(p) -> None:
 
 def p_error(p) -> None:
     if p:
-        print(f"\nErro de sintaxe na linha {p.lineno}: token inesperado '{p.value}'")
+        print(f"\nErro de sintaxe na linha {p.lineno}: token inesperado '{p.value}'.")
         sys.exit(1)
     else:
-        print("\nErro de sintaxe no final do arquivo")
+        print("\nErro de sintaxe no final do arquivo.")
         sys.exit(1)
 
 

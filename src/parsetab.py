@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ARROW ATTACK CHOICE ENEMY GOTO ID LBRACE NUMBER RBRACE ROOM STRING TEXTscript : roomsrooms : rooms roomrooms : roomroom : ROOM ID LBRACE stmts RBRACEstmts : stmts stmtstmts : stmtstmt : TEXT STRINGstmt : CHOICE STRING ARROW IDstmt : ENEMY STRING ID NUMBERstmt : ATTACKstmt : GOTO ID'
+_lr_signature = 'ARROW ATTACK CHOICE ENEMY GOTO HERO ID LBRACE NUMBER RBRACE ROOM STRING TEXTscript : roomsrooms : rooms roomrooms : roomroom : ROOM ID LBRACE stmts RBRACEstmts : stmts stmtstmts : stmtstmt : TEXT STRINGstmt : CHOICE STRING ARROW IDstmt : ENEMY STRING ID NUMBERstmt : HERO STRING ID NUMBERstmt : ATTACKstmt : GOTO ID'
     
-_lr_action_items = {'ROOM':([0,2,3,5,15,],[4,4,-3,-2,-4,]),'$end':([1,2,3,5,15,],[0,-1,-3,-2,-4,]),'ID':([4,14,19,21,],[6,20,22,23,]),'LBRACE':([6,],[7,]),'TEXT':([7,8,9,13,16,17,20,23,24,],[10,10,-6,-10,-5,-7,-11,-8,-9,]),'CHOICE':([7,8,9,13,16,17,20,23,24,],[11,11,-6,-10,-5,-7,-11,-8,-9,]),'ENEMY':([7,8,9,13,16,17,20,23,24,],[12,12,-6,-10,-5,-7,-11,-8,-9,]),'ATTACK':([7,8,9,13,16,17,20,23,24,],[13,13,-6,-10,-5,-7,-11,-8,-9,]),'GOTO':([7,8,9,13,16,17,20,23,24,],[14,14,-6,-10,-5,-7,-11,-8,-9,]),'RBRACE':([8,9,13,16,17,20,23,24,],[15,-6,-10,-5,-7,-11,-8,-9,]),'STRING':([10,11,12,],[17,18,19,]),'ARROW':([18,],[21,]),'NUMBER':([22,],[24,]),}
+_lr_action_items = {'ROOM':([0,2,3,5,16,],[4,4,-3,-2,-4,]),'$end':([1,2,3,5,16,],[0,-1,-3,-2,-4,]),'ID':([4,15,20,21,23,],[6,22,24,25,26,]),'LBRACE':([6,],[7,]),'TEXT':([7,8,9,14,17,18,22,26,27,28,],[10,10,-6,-11,-5,-7,-12,-8,-9,-10,]),'CHOICE':([7,8,9,14,17,18,22,26,27,28,],[11,11,-6,-11,-5,-7,-12,-8,-9,-10,]),'ENEMY':([7,8,9,14,17,18,22,26,27,28,],[12,12,-6,-11,-5,-7,-12,-8,-9,-10,]),'HERO':([7,8,9,14,17,18,22,26,27,28,],[13,13,-6,-11,-5,-7,-12,-8,-9,-10,]),'ATTACK':([7,8,9,14,17,18,22,26,27,28,],[14,14,-6,-11,-5,-7,-12,-8,-9,-10,]),'GOTO':([7,8,9,14,17,18,22,26,27,28,],[15,15,-6,-11,-5,-7,-12,-8,-9,-10,]),'RBRACE':([8,9,14,17,18,22,26,27,28,],[16,-6,-11,-5,-7,-12,-8,-9,-10,]),'STRING':([10,11,12,13,],[18,19,20,21,]),'ARROW':([19,],[23,]),'NUMBER':([24,25,],[27,28,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'script':([0,],[1,]),'rooms':([0,],[2,]),'room':([0,2,],[3,5,]),'stmts':([7,],[8,]),'stmt':([7,8,],[9,16,]),}
+_lr_goto_items = {'script':([0,],[1,]),'rooms':([0,],[2,]),'room':([0,2,],[3,5,]),'stmts':([7,],[8,]),'stmt':([7,8,],[9,17,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,15 +27,16 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> script","S'",1,None,None,None),
-  ('script -> rooms','script',1,'p_script','parser.py',7),
-  ('rooms -> rooms room','rooms',2,'p_rooms_multiple','parser.py',12),
-  ('rooms -> room','rooms',1,'p_rooms_single','parser.py',18),
-  ('room -> ROOM ID LBRACE stmts RBRACE','room',5,'p_room','parser.py',23),
-  ('stmts -> stmts stmt','stmts',2,'p_stmts_multiple','parser.py',28),
-  ('stmts -> stmt','stmts',1,'p_stmts_single','parser.py',33),
-  ('stmt -> TEXT STRING','stmt',2,'p_stmt_text','parser.py',38),
-  ('stmt -> CHOICE STRING ARROW ID','stmt',4,'p_stmt_choice','parser.py',43),
-  ('stmt -> ENEMY STRING ID NUMBER','stmt',4,'p_stmt_enemy','parser.py',48),
-  ('stmt -> ATTACK','stmt',1,'p_stmt_attack','parser.py',53),
-  ('stmt -> GOTO ID','stmt',2,'p_stmt_goto','parser.py',58),
+  ('script -> rooms','script',1,'p_script','parser.py',9),
+  ('rooms -> rooms room','rooms',2,'p_rooms_multiple','parser.py',14),
+  ('rooms -> room','rooms',1,'p_rooms_single','parser.py',20),
+  ('room -> ROOM ID LBRACE stmts RBRACE','room',5,'p_room','parser.py',25),
+  ('stmts -> stmts stmt','stmts',2,'p_stmts_multiple','parser.py',30),
+  ('stmts -> stmt','stmts',1,'p_stmts_single','parser.py',35),
+  ('stmt -> TEXT STRING','stmt',2,'p_stmt_text','parser.py',40),
+  ('stmt -> CHOICE STRING ARROW ID','stmt',4,'p_stmt_choice','parser.py',45),
+  ('stmt -> ENEMY STRING ID NUMBER','stmt',4,'p_stmt_enemy','parser.py',50),
+  ('stmt -> HERO STRING ID NUMBER','stmt',4,'p_stmt_hero','parser.py',55),
+  ('stmt -> ATTACK','stmt',1,'p_stmt_attack','parser.py',60),
+  ('stmt -> GOTO ID','stmt',2,'p_stmt_goto','parser.py',65),
 ]

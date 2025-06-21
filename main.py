@@ -15,24 +15,24 @@ def main():
         choice = input("\nSeleção: ").strip()
 
         if choice == "0":
-            print("Obrigado por jogar!")
+            print("\nObrigado por jogar!")
             loading("\nEncerrando")
 
             os.system("clear")
             sys.exit(0)
 
         elif choice == "1":
-            loading("\nCarregando Floresta Maldita")
-            script = load_script("scripts/floresta_maldita.msr")
-        elif choice == "2":
-            loading("\nCarregando Fortaleza do Demônio")
-            script = load_script("scripts/fortaleza_demonio.msr")
-        elif choice == "3":
-            loading("\nCarregando Morte no Espaço")
-            script = load_script("scripts/morte_espaco.msr")
-        elif choice == "4":
-            loading("\nCarregando Castelo Sombrio")
+            loading("\nCarregando 'Castelo Sombrio'")
             script = load_script("scripts/castelo_sombrio.msr")
+        elif choice == "2":
+            loading("\nCarregando 'Floresta Maldita'")
+            script = load_script("scripts/floresta_maldita.msr")
+        elif choice == "3":
+            loading("\nCarregando 'A Fortaleza do Demônio'")
+            script = load_script("scripts/fortaleza_demonio.msr")
+        elif choice == "4":
+            loading("\nCarregando 'Morte no Espaço'")
+            script = load_script("scripts/morte_espaco.msr")
         else:
             os.system("clear")
             slow_text("Escolha inválida. Por favor, tente novamente.")

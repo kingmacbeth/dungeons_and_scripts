@@ -1,5 +1,6 @@
 import os
 
+from src.entities import Enemy, Hero
 from src.utils import slow_text
 
 
@@ -7,22 +8,19 @@ class VM:
     def __init__(self, game_data):
         self.game_data = game_data
         self.current_room = "start"
-        self.max_hp = 10
-        self.current_hp = 10
-        self.enemy_name = ""
+        self.hero = Hero("Jogador 1")
+        self.enemy = None
 
-    def show_enemy_art(self, enemy_id: str) -> None:
+    def show_enemy_art(self, filename: str) -> None:
         base_path = os.path.dirname(__file__)
-        art_path = os.path.normpath(
-            os.path.join(base_path, "..", f"ascii/{enemy_id}.txt")
-        )
+        art_path = os.path.normpath(os.path.join(base_path, "..", filename))
 
         if os.path.exists(art_path):
             with open(art_path, "r", encoding="utf-8") as f:
                 art = f.read()
             slow_text(art, 0.01)
         else:
-            slow_text(f"\n[ilustração não disponível para '{enemy_id}']")
+            slow_text(f"\n[ilustração não disponível para '{filename}']")
 
     def run(self) -> None:
         while True:
@@ -33,44 +31,58 @@ class VM:
             next_room_set = False
 
             for stmt in room:
-                if stmt[0] == "text":
-                    slow_text(f"\n{stmt[1]}")
-                elif stmt[0] == "enemy":
-                    self.enemy_name = stmt[1]
-                    self.max_hp = stmt[2]
-                    slow_text(f"\nUm inimigo apareceu: {self.enemy_name}")
-                    slow_text(f"\n(HP {self.max_hp})")
-                    self.show_enemy_art(self.enemy_name.lower().replace(" ", "_"))
-                elif stmt[0] == "attack":
-                    self.handle_attack()
-                elif stmt[0] == "choice":
-                    choices = [s for s in room if s[0] == "choice"]
-                    self.handle_choices(choices)
-                    return
-                elif stmt[0] == "goto":
-                    self.current_room = stmt[1]
-                    return
+                match stmt[0]:
+                    case "text":
+                        slow_text(f"\n{stmt[1]}")
+                    case "hero":
+                        self.hero = Hero(stmt[1], stmt[2])
+                    case "enemy":
+                        self.enemy = Enemy(stmt[1], stmt[2])
+                        slow_text(
+                            f"\nUm inimigo apareceu: {self.enemy.name} (HP {self.enemy.hp})"
+                        )
+                        self.show_enemy_art(self.enemy.get_ascii_filename())
+                    case "attack":
+                        self.handle_attack()
+                    case "choice":
+                        self.handle_choices([s for s in room if s[0] == "choice"])
+                        return
+                    case "goto":
+                        self.current_room = stmt[1]
+                        return
 
             if not next_room_set:
                 self.current_room = None
 
     def handle_attack(self) -> None:
         slow_text("\nIniciando combate...")
-        while self.current_hp > 0:
+
+        while self.enemy and self.enemy.hp > 0 and self.hero.hp > 0:
             input("\nPressione Enter para atacar!")
-            self.current_hp -= 3
-            slow_text(f"\nVocê causou 3 de dano. HP do inimigo: {self.current_hp}")
-            if self.current_hp <= 0:
+
+            hero_dmg = self.hero.attack()
+            self.enemy.take_damage(hero_dmg)
+            slow_text(
+                f"\nVocê causou {hero_dmg} de dano. HP do inimigo: {self.enemy.hp}"
+            )
+
+            if self.enemy.hp <= 0:
                 slow_text("\nInimigo derrotado!")
-                self.show_enemy_art(
-                    self.enemy_name.lower().replace(" ", "_") + "_morto"
-                )
-            elif self.current_hp <= 0.6 * self.max_hp:
-                self.show_enemy_art(
-                    self.enemy_name.lower().replace(" ", "_") + "_machucado"
-                )
-            else:
-                self.show_enemy_art(self.enemy_name.lower().replace(" ", "_"))
+                self.show_enemy_art(self.enemy.get_ascii_filename("_morto"))
+                break
+            elif self.enemy.hp <= 0.6 * self.enemy.max_hp:
+                self.show_enemy_art(self.enemy.get_ascii_filename("_machucado"))
+
+            enemy_dmg = self.enemy.attack()
+            self.hero.take_damage(enemy_dmg)
+            slow_text(
+                f"\n{self.enemy.name} contra-ataca e causa {enemy_dmg} de dano! Seu HP: {self.hero.hp}"
+            )
+
+            if self.hero.hp <= 0:
+                slow_text("\nVocê foi derrotado... fim de jogo.")
+                self.current_room = None
+                return
 
     def handle_choices(self, choices) -> None:
         slow_text("\nEscolha uma opção:")

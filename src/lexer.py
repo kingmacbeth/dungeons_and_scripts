@@ -5,6 +5,7 @@ reserved = {
     "text": "TEXT",
     "choice": "CHOICE",
     "goto": "GOTO",
+    "hero": "HERO",
     "enemy": "ENEMY",
     "attack": "ATTACK",
 }

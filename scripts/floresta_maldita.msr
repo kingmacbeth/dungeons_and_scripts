@@ -1,4 +1,5 @@
 room start {
+    hero "Aragorn" HP 30
     text "Você está diante de uma floresta envolta por névoa espessa. Um sussurro ecoa: 'Volte... enquanto pode.'"
     choice "Entrar na floresta" -> trilha
     choice "Ignorar e seguir por outra estrada" -> vila
@@ -29,5 +30,5 @@ room maldicao {
 }
 
 room fim {
-    text "Obrigado por explorar a Floresta Amaldiçoada!"
+    text "Obrigado por explorar a Floresta Maldita!"
 }
