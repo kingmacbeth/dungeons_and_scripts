@@ -78,6 +78,33 @@ def p_error(p) -> None:
 parser = yacc.yacc()
 
 
+def check_semantics(ast: dict) -> None:
+    if "start" not in ast:
+        raise ValueError("Erro semântico: sala 'start' não está definida.")
+
+    for room_name, stmts in ast.items():
+        for stmt in stmts:
+            if stmt[0] in ("goto", "choice"):
+                dest = stmt[-1]
+                if dest not in ast:
+                    raise ValueError(
+                        f"Erro semântico: sala '{dest}' referenciada em '{room_name}' não existe."
+                    )
+            elif stmt[0] == "enemy":
+                if len(stmt) < 3 or not isinstance(stmt[2], int) or stmt[2] <= 0:
+                    raise ValueError(
+                        f"Erro semântico: HP inválido do inimigo '{stmt[1]}' na sala '{room_name}'."
+                    )
+            elif stmt[0] == "attack":
+                previous = [s for s in stmts if s[0] == "enemy"]
+                if not previous:
+                    raise ValueError(
+                        f"Erro semântico: instrução 'attack' em '{room_name}' sem inimigo definido antes."
+                    )
+
+
 def parse_code(script_file: str) -> dict:
     lexer = initialize_lexer()
-    return parser.parse(script_file, lexer=lexer)
+    ast = parser.parse(script_file, lexer=lexer)
+    check_semantics(ast)
+    return ast
