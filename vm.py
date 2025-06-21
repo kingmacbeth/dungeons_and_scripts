@@ -1,8 +1,22 @@
+import os
+
+
 class VM:
     def __init__(self, game_data):
         self.game_data = game_data
         self.current_room = "start"
         self.hp = 10
+
+    def show_enemy_art(self, enemy_id: str) -> None:
+        base_path = os.path.dirname(__file__)
+        art_path = os.path.join(base_path, "ascii_assets", f"{enemy_id}.txt")
+
+        if os.path.exists(art_path):
+            with open(art_path, "r", encoding="utf-8") as f:
+                art = f.read()
+            print(art)
+        else:
+            print(f"[ilustração não disponível para '{enemy_id}']")
 
     def run(self):
         while True:
@@ -20,6 +34,7 @@ class VM:
                     enemy_hp = stmt[2]
                     print(f"\n👹 Um inimigo apareceu: {enemy_name} (HP {enemy_hp})")
                     self.enemy_hp = enemy_hp
+                    self.show_enemy_art(enemy_name.lower().replace(" ", "_"))
                 elif stmt[0] == "attack":
                     self.handle_attack()
                 elif stmt[0] == "choice":

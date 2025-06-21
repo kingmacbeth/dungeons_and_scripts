@@ -8,9 +8,10 @@ def main():
     print("1. Floresta Maldita")
     print("2. Fortaleza do Demônio")
     print("3. Morte no Espaço")
+    print("4. Teste")
 
     choice = input("Digite o número do cartucho: ")
-    if choice not in ["1", "2", "3"]:
+    if choice not in ["1", "2", "3", "4"]:
         print("Escolha inválida. Encerrando o jogo.")
         return
     print(f"Você escolheu o cartucho {choice}. Carregando o jogo...")
@@ -24,6 +25,9 @@ def main():
     elif choice == "3":
         print("Carregando Morte no Espaço...")
         script = load_script("scripts/morte_espaco.msr")
+    elif choice == "4":
+        print("Carregando Teste...")
+        script = load_script("scripts/example.msr")
     vm = VM(script)
 
     while vm.current_room:
